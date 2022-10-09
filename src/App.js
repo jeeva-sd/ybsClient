@@ -1,44 +1,42 @@
+import { useEffect } from 'react';
 import GoogleLogin from 'react-google-login';
-
+import { clientId } from './constant';
+import { addPost } from './api';
 import './App.css';
+import { gapi } from 'gapi-script';
 
-function App() {
-  const handleSuccess = () => {
-    console.log("first");
-  };
+const App = () => {
 
-  const handleFailure = () => {
-    console.log("first");
-  };
+  useEffect(() => {
+    // call();
 
-  const config = {
-    clientId: '471225452171-2ss2d4v4r91paf76r1t2osv8urvpu8vs.apps.googleusercontent.com',
-    clientSecretKey: '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'
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "https://www.googleapis.com/auth/blogger"
+      });
+    }
+
+    gapi.load('client:auth2', start);
+  }, []);
+
+  const handleSuccess = async (e) => {
+    console.log("first", e);
+    // const accessToken = e.accessToken;
+    const accessToken = await gapi.auth.getToken().access_token;
+    await addPost(accessToken);
   };
 
   return (
     <div className="App">
-      hi
-
       <GoogleLogin
-        // clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-        clientId={config.clientId}
-        buttonText="Login"
-        onSuccess={() => handleSuccess()}
-        onFailure={() => handleFailure()}
-        cookiePolicy={'single_host_origin'}
+        clientId={clientId}
+        onSuccess={(e) => handleSuccess(e)}
+        onFailure={(e) => console.log(e)}
+      // isSignedIn={true}
       />
-
-      {/* <GoogleLogin
-        clientId={config.clientId}
-        buttonText="Login"
-        onSuccess={() => handleSuccess()}
-        onFailure={() => handleFailure()}
-        cookiePolicy={'single_host_origin'}
-        isSignedIn={true}
-      /> */}
     </div>
   );
-}
+};
 
 export default App;
