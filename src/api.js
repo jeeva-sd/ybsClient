@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiKey, blogId } from "./constant";
+import { apiKey, blogId } from "./constant/constant";
 
 export const call = async () => {
     const result = await axios.get(`https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}`);
