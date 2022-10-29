@@ -1,10 +1,10 @@
 import { SET_YOUTUBE_VIDEOS, SET_VIDEO_REQUESTING, SET_SEARCH_TEXT } from "../action/action-creators";
-import { data } from "../constant/data";
+// import { data } from "../constant/data";
 
 const initialState = {
     videos: {
         isRequesting: false,
-        data: data,
+        data: [],
         searchText: ''
     },
 };
