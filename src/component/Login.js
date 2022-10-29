@@ -1,10 +1,15 @@
 import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 import GoogleLogin from 'react-google-login';
+import { setLoginCredentials } from '../action/login';
 import { clientId } from '../constant/constant';
-import { addPost } from '../api';
+import '../assets/css/login.scss';
 
 const App = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     function start() {
@@ -17,12 +22,15 @@ const App = () => {
   }, []);
 
   const handleSuccess = async (e) => {
+    const { email, name, imageUrl } = e.profileObj;
     const accessToken = await gapi.auth.getToken().access_token;
-    await addPost(accessToken);
+
+    dispatch(setLoginCredentials({ name, email, imageUrl, accessToken }));
+    navigate('/youtube');
   };
 
   return (
-    <div className="App">
+    <div className="login-app">
       <GoogleLogin
         clientId={clientId}
         onSuccess={(e) => handleSuccess(e)}

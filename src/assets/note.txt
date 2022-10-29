@@ -1,0 +1,14 @@
+ Blog Post api error response
+ {
+    "error": {
+    "code": 403,
+    "message": "We're sorry, but one or more limits for the requested action have been exceeded.",
+    "errors": [
+        {
+        "message": "We're sorry, but one or more limits for the requested action have been exceeded.",
+        "domain": "usageLimits",
+        "reason": "rateLimitExceeded"
+        }
+    ]
+    }
+}
