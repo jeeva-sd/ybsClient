@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import moment from 'moment/moment';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Alert, CardActionArea, Grid } from '@mui/material';
+import { Alert, CardActionArea, CircularProgress, Grid } from '@mui/material';
 import { Container } from '@mui/system';
-import { getYoutubeVideos } from '../../action/youtube';
 import '../../assets/css/youtube-home.scss';
 
 const VideoCard = () => {
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const videos = useSelector(state => state.youtube.videos.data);
     const searchText = useSelector(state => state.youtube.videos.searchText);
+    const isRequesting = useSelector(state => state.youtube.videos.isRequesting);
 
     const [videoList, setVideoList] = useState([]);
 
-    useEffect(() => dispatch(getYoutubeVideos()), [dispatch]);
+    // useEffect(() => dispatch(getYoutubeVideos()), [dispatch]);
 
     useEffect(() => {
         if (videos && videos.length > 0) {
@@ -30,11 +31,11 @@ const VideoCard = () => {
         }
     }, [videos, searchText]);
 
-    const handleVideo = videoId => window.open(`https://www.youtube.com/watch?v=${videoId}`);
+    const handleVideo = videoId => navigate(`/youtube/${videoId}`);
 
     return (
         <Container maxWidth="lg" className='yt-container'>
-            <Grid container spacing={2} >
+            {!isRequesting && <Grid container spacing={2}>
                 {videoList && videoList.length > 0 ? videoList.map((item, index) => {
                     return (
                         <Grid item xs={10} md={3} key={index} onClick={() => handleVideo(item.videoId)}>
@@ -70,7 +71,15 @@ const VideoCard = () => {
                         item xs={12}>
                         <Alert severity="error"> No video found</Alert>
                     </Grid>}
-            </Grid >
+            </Grid >}
+
+            {isRequesting && <Grid container
+                direction="column"
+                alignItems="center">
+                <Grid item xs={12}>
+                    <CircularProgress disableShrink />
+                </Grid>
+            </Grid>}
         </Container>
     );
 };

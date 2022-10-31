@@ -6,6 +6,7 @@ import GoogleLogin from 'react-google-login';
 import { setLoginCredentials } from '../action/login';
 import { clientId } from '../constant/constant';
 import '../assets/css/login.scss';
+import { getYoutubeVideos } from '../action/youtube';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,8 @@ const App = () => {
     const accessToken = await gapi.auth.getToken().access_token;
 
     dispatch(setLoginCredentials({ name, email, imageUrl, accessToken }));
+    dispatch(getYoutubeVideos());
+
     navigate('/youtube');
   };
 

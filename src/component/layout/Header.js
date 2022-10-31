@@ -21,6 +21,7 @@ import '../../assets/css/header.scss';
 import { useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import Progress from '../youtube/Progress';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -67,6 +68,7 @@ export default function PrimarySearchAppBar() {
     const videos = useSelector(state => state.youtube.videos.data);
     const postCount = useSelector(state => state.blog.data.postCount);
     const searchText = useSelector(state => state.youtube.videos.searchText);
+    const isRequestingYoutubeVideos = useSelector(state => state.youtube.videos.isRequesting);
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -257,6 +259,7 @@ export default function PrimarySearchAppBar() {
             </AppBar>
             {renderMobileMenu}
             {renderMenu}
+            {isRequestingYoutubeVideos && <LinearProgress />}
         </Box>
     );
 }

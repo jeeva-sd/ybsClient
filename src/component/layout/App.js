@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Login from '../Login';
 import Youtube from '../youtube/Layout';
+import VideoDetail from '../youtube/VideoDetail';
 import Header from './Header';
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="youtube" element={<PrivateRoute><Header /><Youtube /></PrivateRoute>} />
+      <Route path="youtube/:videoId" element={<PrivateRoute><Header /><VideoDetail /></PrivateRoute>} />
     </Routes>
   );
 };
