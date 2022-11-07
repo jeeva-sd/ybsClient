@@ -1,31 +1,7 @@
 .youtube-home {
     background-color: #E7EBF0;
 
-    .yt-container {
-        margin-top: 50px;
-        margin-bottom: 50px;
-        // border-radius: 10px;
-        // background-color: #cdcd;
-    }
 
-    .card-highlight {
-        background-color: rgb(255, 255, 255);
-    }
-
-    .published-time {
-        color: #1976D2;
-    }
-
-    .video-title {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-    }
-
-    .card {
-        height: 300px;
-    }
 
     .add-post {
         padding-top: 25px;
@@ -44,5 +20,29 @@
             color: #1976D2;
             text-decoration: underline;
         }
+    }
+}
+
+.yt-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    .card-highlight {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .published-time {
+        color: #1976D2;
+    }
+
+    .video-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+    }
+
+    .card {
+        height: 300px;
     }
 }

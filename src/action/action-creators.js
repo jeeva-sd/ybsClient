@@ -9,3 +9,4 @@ export const GET_SELECTED_VIDEO = 'GET_SELECTED_VIDEO';
 
 // Blog
 export const SET_POST_DETAILS = 'SET_POST_DETAILS';
+export const SET_POST_COUNT = 'SET_POST_COUNT';

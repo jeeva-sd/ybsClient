@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment/moment';
@@ -13,30 +13,15 @@ import '../../assets/css/youtube-home.scss';
 const VideoCard = () => {
     const navigate = useNavigate();
     const videos = useSelector(state => state.youtube.videos.data);
-    const searchText = useSelector(state => state.youtube.videos.searchText);
+    // const searchText = useSelector(state => state.youtube.videos.searchText);
     const isRequesting = useSelector(state => state.youtube.videos.isRequesting);
 
-    const [videoList, setVideoList] = useState([]);
-
-    // useEffect(() => dispatch(getYoutubeVideos()), [dispatch]);
-
-    useEffect(() => {
-        if (videos && videos.length > 0) {
-            if (searchText && searchText.trim().length > 0) {
-                const filteredVideo = videos.filter(video => video.title.toLowerCase().includes(searchText.toLowerCase()));
-                setVideoList(filteredVideo);
-            } else {
-                setVideoList(videos);
-            }
-        }
-    }, [videos, searchText]);
-
-    const handleVideo = videoId => navigate(`/youtube/${videoId}`);
+    const handleVideo = videoId => navigate(`${videoId}`);
 
     return (
         <Container maxWidth="lg" className='yt-container'>
             {!isRequesting && <Grid container spacing={2}>
-                {videoList && videoList.length > 0 ? videoList.map((item, index) => {
+                {videos && videos.length > 0 ? videos.map((item, index) => {
                     return (
                         <Grid item xs={10} md={3} key={index} onClick={() => handleVideo(item.videoId)}>
                             <Card className='card yt-card card-highlight'>

@@ -34,7 +34,6 @@ export default function SimpleAccordion() {
             if (index < 10) {
                 const content = await getContent(video);
                 const post = await addPost(accessToken, content, video.title);
-                console.log("post", post);
 
                 if (post.hasOwnProperty('url')) {
                     const url = post.url;

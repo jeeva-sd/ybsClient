@@ -7,6 +7,7 @@ import { setLoginCredentials } from '../action/login';
 import { clientId } from '../constant/constant';
 import '../assets/css/login.scss';
 import { getYoutubeVideos } from '../action/youtube';
+import { getPostCount } from '../action/blog';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,8 +29,9 @@ const App = () => {
 
     dispatch(setLoginCredentials({ name, email, imageUrl, accessToken }));
     dispatch(getYoutubeVideos());
+    dispatch(getPostCount());
 
-    navigate('/youtube');
+    navigate('/home');
   };
 
   return (

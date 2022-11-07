@@ -1,9 +1,11 @@
-import { SET_POST_DETAILS } from "../action/action-creators";
+import { SET_POST_DETAILS, SET_POST_COUNT } from "../action/action-creators";
 
 const initialState = {
     data: {
         post: [],
         postCount: 0,
+        publishedCount: 0,
+        pendingCount: 0
     },
 };
 
@@ -14,8 +16,22 @@ export const blogReducer = (state = initialState, action) => {
 
             state = {
                 ...state, data: {
+                    ...state.data,
                     post: posts,
                     postCount: posts.length
+                }
+            };
+            break;
+        }
+
+        case SET_POST_COUNT: {
+            const { pendingCount, publishedCount } = action.payload;
+
+            state = {
+                ...state, data: {
+                    ...state.data,
+                    publishedCount: publishedCount,
+                    pendingCount: pendingCount
                 }
             };
             break;
